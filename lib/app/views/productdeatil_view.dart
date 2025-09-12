@@ -1,61 +1,53 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
+import 'package:rebuyapp/app/controllers/productdetail_controller.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
-class ProductdeatilView extends StatelessWidget {
+class ProductdeatilView extends GetView<ProductdetailController> {
   const ProductdeatilView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: SizedBox(
-          width: double.infinity,
-          height: 60,
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {},
 
-          child: Row(
-            children: [
-              Expanded(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: AppColors.DarkGrey,
-                    shape: RoundedRectangleBorder(),
-                  ),
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Save item",
-                      style: TextStyle(color: Colors.white),
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(),
+                      backgroundColor: AppColors.DarkGrey,
+                      foregroundColor: AppColors.white,
+                      padding: EdgeInsets.symmetric(vertical: 15),
                     ),
+                    child: Text('Save item', style: TextStyle(fontSize: 16)),
                   ),
                 ),
-              ),
-              Expanded(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: AppColors.pink,
-                    shape: RoundedRectangleBorder(),
-                  ),
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Buy Now",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed('/purchaseview');
+                    },
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(),
+                      backgroundColor: AppColors.pink,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(vertical: 15),
                     ),
+                    child: Text('Buy Now', style: TextStyle(fontSize: 16)),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
+        backgroundColor: Colors.white,
         body: Padding(
           padding: EdgeInsets.all(25),
           child: SingleChildScrollView(
@@ -79,7 +71,7 @@ class ProductdeatilView extends StatelessWidget {
                 ),
                 SizedBox(height: 25),
                 Card(
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 260,
                     child: Image.asset(
@@ -217,7 +209,7 @@ Widget productDetails() {
         ],
       ),
       SizedBox(height: 10),
-      Container(
+      SizedBox(
         width: 220,
         child: OutlinedButton(
           style: OutlinedButton.styleFrom(

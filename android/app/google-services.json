@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "793234484093",
+    "project_id": "midhackathon-c0235",
+    "storage_bucket": "midhackathon-c0235.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793234484093:android:b26e2ed747b002ebd6fa14",
+        "android_client_info": {
+          "package_name": "com.example.midhackaton"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsBA5yzftxcptVf3nxgSV-rqZ0Pr309k0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793234484093:android:83b1c8ee914c19cad6fa14",
+        "android_client_info": {
+          "package_name": "com.example.rebuyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsBA5yzftxcptVf3nxgSV-rqZ0Pr309k0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

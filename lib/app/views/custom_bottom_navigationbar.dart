@@ -4,10 +4,7 @@ import 'package:rebuyapp/app/utils/colors.dart';
 import 'package:rebuyapp/app/views/explore_view.dart';
 import 'package:rebuyapp/app/views/home_view.dart';
 import 'package:rebuyapp/app/views/likeitem_view.dart';
-import 'package:rebuyapp/app/views/login_view.dart';
 import 'package:rebuyapp/app/views/message_view.dart';
-import 'package:rebuyapp/app/views/signup_view.dart';
-import 'package:rebuyapp/app/views/splash_view.dart';
 
 class CustomBottomNavView extends StatelessWidget {
   final RxInt selectedIndex = 0.obs;

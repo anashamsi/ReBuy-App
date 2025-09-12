@@ -163,7 +163,7 @@ Widget productCard(
   String profilesubname,
 ) {
   return Card(
-    child: Container(
+    child: SizedBox(
       width: double.infinity,
       height: 431,
       child: Stack(

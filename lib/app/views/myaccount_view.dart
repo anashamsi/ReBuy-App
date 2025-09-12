@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rebuyapp/app/controllers/myaccount_controller.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
-class MyaccountView extends StatelessWidget {
+class MyaccountView extends GetView<MyaccountController> {
   const MyaccountView({super.key});
 
   @override
@@ -143,7 +144,12 @@ Widget topRow() {
       Expanded(
         child: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.close, color: AppColors.black, size: 40),
+          icon: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(Icons.close, color: AppColors.black, size: 40),
+          ),
         ),
       ),
     ],
@@ -188,12 +194,12 @@ Widget profileIcon() {
   );
 }
 
-Widget inputTextField(String name, Icon _icon, [bool? obsecure]) {
+Widget inputTextField(String name, Icon icon, [bool? obsecure]) {
   return TextField(
     obscureText: obsecure ?? false,
     decoration: InputDecoration(
       filled: true,
-      suffixIcon: _icon,
+      suffixIcon: icon,
 
       fillColor: AppColors.grey,
       hintText: name,

@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rebuyapp/app/controllers/likeitem_controller.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
-class LikeitemView extends StatelessWidget {
+class LikeitemView extends GetView<LikeitemController> {
   const LikeitemView({super.key});
 
   @override

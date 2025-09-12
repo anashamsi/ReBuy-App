@@ -121,7 +121,9 @@ Widget topRow() {
       Spacer(),
       Expanded(
         child: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed("/sidebar");
+          },
           icon: Icon(CupertinoIcons.bars, color: AppColors.black, size: 30),
         ),
       ),
@@ -210,10 +212,10 @@ Widget productCards() {
         ),
         SizedBox(width: 16),
         buildCard(
-          imagePath: 'assets/images/toyimage.jpg',
-          title: 'Batman Toy',
-          yearBrand: '2018 | FunSkool',
-          price: 'Rs 899',
+          imagePath: 'assets/images/miqimage.jpg',
+          title: 'Shuru Mic',
+          yearBrand: '2020 | Shuru',
+          price: 'Rs 24,999',
         ),
       ],
     ),
@@ -256,72 +258,81 @@ Widget buildCard({
   required String yearBrand,
   required String price,
 }) {
-  return Container(
-    width: 250,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(16),
-      boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8)],
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-          child: Image.asset(
-            imagePath,
-            height: 160,
-            width: double.infinity,
-            fit: BoxFit.cover,
+  return InkWell(
+    onTap: () {
+      Get.toNamed("/productview");
+    },
+    child: Container(
+      width: 250,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8)],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            child: Image.asset(
+              imagePath,
+              height: 160,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          Padding(
+            padding: EdgeInsets.all(12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        maxLines: 1,
+
+                        style: TextStyle(
+                          height: 0,
+                          fontSize: 18,
+
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.black,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        yearBrand,
+                        style: TextStyle(
+                          color: AppColors.lightPink,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      title,
+                      price,
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                         color: AppColors.black,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      yearBrand,
-                      style: TextStyle(
-                        color: AppColors.lightPink,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ],
                 ),
-              ),
-
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    price,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

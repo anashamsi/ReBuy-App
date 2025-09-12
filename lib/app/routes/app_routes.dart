@@ -13,4 +13,7 @@ abstract class Routes {
   static const sidebar = '/sidebar';
   static const myaccount = '/myaccount';
   static const productview = '/productview';
+  static const purchaseview = '/purchaseview';
+  static const orderconfirmation = '/orderconfirmation';
+  static const paymentpage = '/paymentpage';
 }

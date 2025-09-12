@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-import 'package:rebuyapp/app/controllers/login_controller.dart';
+import 'package:rebuyapp/app/controllers/firebase_controller.dart';
 import 'package:rebuyapp/app/controllers/signup_controller.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
 class SignupView extends GetView<SignupController> {
-  const SignupView({super.key});
+  SignupView({super.key});
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passcontroller = TextEditingController();
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +63,19 @@ class SignupView extends GetView<SignupController> {
                 SizedBox(height: 20),
                 inputTextField("Name"),
                 SizedBox(height: 15),
-                inputTextField("Email"),
+                inputTextField("Email", false, _emailcontroller),
                 SizedBox(height: 15),
-                inputTextField("Password", true),
+                inputTextField("Password", true, _passcontroller),
                 SizedBox(height: 15),
-                signupButton(),
+                signupButton(() async {
+                  bool success = await authController.register(
+                    _emailcontroller.text.trim(),
+                    _passcontroller.text.trim(),
+                  );
+                  if (success) {
+                    Get.offNamed('/login');
+                  }
+                }),
                 SizedBox(height: 20),
                 loginline(),
               ],
@@ -79,7 +89,9 @@ class SignupView extends GetView<SignupController> {
 
 Widget backbutton() {
   return OutlinedButton(
-    onPressed: () {},
+    onPressed: () {
+      Get.back();
+    },
     style: OutlinedButton.styleFrom(
       fixedSize: const Size(46, 55),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -167,8 +179,13 @@ Widget orLine() {
   );
 }
 
-Widget inputTextField(String name, [bool? obsecure]) {
+Widget inputTextField(
+  String name, [
+  bool? obsecure,
+  TextEditingController? controller,
+]) {
   return TextField(
+    controller: controller,
     obscureText: obsecure ?? false,
     decoration: InputDecoration(
       filled: true,
@@ -185,7 +202,7 @@ Widget inputTextField(String name, [bool? obsecure]) {
   );
 }
 
-Widget signupButton() {
+Widget signupButton(VoidCallback ontap) {
   return Container(
     width: 344,
     height: 56,
@@ -199,7 +216,8 @@ Widget signupButton() {
     ),
 
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: ontap,
+
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,

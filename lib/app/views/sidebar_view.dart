@@ -1,9 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rebuyapp/app/controllers/firebase_controller.dart';
+import 'package:rebuyapp/app/controllers/sidebar_controller.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
-class SidebarView extends StatelessWidget {
-  const SidebarView({super.key});
+class SidebarView extends GetView<SidebarController> {
+  SidebarView({super.key});
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +39,36 @@ class SidebarView extends StatelessWidget {
                 Icons.person,
                 "My Account",
                 "Edit you details, account settings ",
+                () {
+                  Get.toNamed("/myaccount");
+                },
               ),
               SizedBox(height: 10),
               menuButton(
                 Icons.shopping_bag,
                 "My Orders",
                 "View all your orders",
+                () {
+                  Get.toNamed('/myorders');
+                },
               ),
               SizedBox(height: 10),
               menuButton(
                 Icons.view_list,
                 "My Listings",
                 "View your product listing for sale",
+                () {
+                  Get.toNamed('/mylisting');
+                },
               ),
               SizedBox(height: 10),
               menuButton(
                 Icons.favorite_outline,
                 "Liked Items",
                 "See the products you have wishlisted",
+                () {
+                  Get.toNamed("/likeitem");
+                },
               ),
               SizedBox(height: 20),
 
@@ -62,6 +77,12 @@ class SidebarView extends StatelessWidget {
                 children: [
                   OutlinedButton(
                     onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(width: 1.5, color: AppColors.black),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(12),
+                      ),
+                    ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
@@ -69,26 +90,23 @@ class SidebarView extends StatelessWidget {
                         style: TextStyle(color: AppColors.black, fontSize: 15),
                       ),
                     ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      authController.logout();
+                      Get.toNamed('/login');
+                    },
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(width: 1.5, color: AppColors.black),
+                      backgroundColor: AppColors.black,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusGeometry.circular(12),
                       ),
                     ),
-                  ),
-                  OutlinedButton(
-                    onPressed: () {},
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         'Sign out',
                         style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: AppColors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(12),
                       ),
                     ),
                   ),
@@ -103,9 +121,14 @@ class SidebarView extends StatelessWidget {
   }
 }
 
-Widget menuButton(IconData _icon, String title, String subtitle) {
+Widget menuButton(
+  IconData icon,
+  String title,
+  String subtitle,
+  VoidCallback ontap,
+) {
   return InkWell(
-    onTap: () {},
+    onTap: ontap,
     child: Container(
       width: double.infinity,
       height: 80,
@@ -119,7 +142,7 @@ Widget menuButton(IconData _icon, String title, String subtitle) {
           mainAxisAlignment: MainAxisAlignment.start,
 
           children: [
-            Icon(_icon, color: AppColors.black, size: 35),
+            Icon(icon, color: AppColors.black, size: 35),
             SizedBox(width: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +179,9 @@ Widget menuButton(IconData _icon, String title, String subtitle) {
 
 Widget closeButton() {
   return IconButton(
-    onPressed: () {},
+    onPressed: () {
+      Get.toNamed("/home");
+    },
     icon: Icon(Icons.close, color: AppColors.black, size: 40),
   );
 }

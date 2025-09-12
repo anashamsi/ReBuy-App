@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:rebuyapp/app/controllers/firebase_controller.dart';
 import 'package:rebuyapp/app/controllers/login_controller.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+  final _emailcontroller = TextEditingController();
+  final _passcontroller = TextEditingController();
+  final authController = Get.find<AuthController>();
+  LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +62,19 @@ class LoginView extends GetView<LoginController> {
                 SizedBox(height: 20),
                 orLine(),
                 SizedBox(height: 20),
-                inputTextField("Email"),
+                inputTextField(_emailcontroller, "Email"),
                 SizedBox(height: 15),
-                inputTextField("Password", true),
+                inputTextField(_passcontroller, "Password", true),
                 SizedBox(height: 15),
-                loginButton(),
+                loginButton(() async {
+                  bool success = await authController.login(
+                    _emailcontroller.text.trim(),
+                    _passcontroller.text.trim(),
+                  );
+                  if (success) {
+                    Get.offNamed('/home');
+                  }
+                }),
                 SizedBox(height: 20),
                 signupline(),
               ],
@@ -164,8 +176,13 @@ Widget orLine() {
   );
 }
 
-Widget inputTextField(String name, [bool? obsecure]) {
+Widget inputTextField(
+  TextEditingController controller,
+  String name, [
+  bool? obsecure,
+]) {
   return TextField(
+    controller: controller,
     obscureText: obsecure ?? false,
     decoration: InputDecoration(
       filled: true,
@@ -182,31 +199,35 @@ Widget inputTextField(String name, [bool? obsecure]) {
   );
 }
 
-Widget loginButton() {
-  return Container(
-    width: 344,
-    height: 56,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.topRight,
-        colors: [Color(0xffff5961), Color(0xfff9589d)],
-      ),
-      borderRadius: BorderRadius.circular(22),
-    ),
+Widget loginButton(VoidCallback ontap) {
+  return InkWell(
+    onTap: ontap,
 
-    child: ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
+    child: Container(
+      width: 344,
+      height: 56,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+          colors: [Color(0xffff5961), Color(0xfff9589d)],
+        ),
+        borderRadius: BorderRadius.circular(22),
       ),
-      child: Text(
-        'Log in',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
-          color: Colors.white,
+
+      child: ElevatedButton(
+        onPressed: ontap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
+        child: Text(
+          'Log in',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
         ),
       ),
     ),

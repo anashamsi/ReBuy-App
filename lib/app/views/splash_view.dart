@@ -27,6 +27,7 @@ class SplashView extends GetView<SplashController> {
               child: Text(
                 "ReBuy",
                 style: TextStyle(
+                  fontFamily: 'Dosis',
                   fontSize: 24,
                   fontWeight: FontWeight.w800,
                   color: Color(0xff3C3C3C),
