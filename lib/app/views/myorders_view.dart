@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rebuyapp/app/utils/colors.dart';
 
-class LikeitemView extends StatelessWidget {
-  const LikeitemView({super.key});
+class MyordersView extends StatelessWidget {
+  const MyordersView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ Widget topRow() {
       backbutton(),
       SizedBox(width: 10),
       Text(
-        'Liked items',
+        'My Orders',
         style: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.w700,
@@ -65,30 +65,35 @@ Widget likeItem() {
       "title": "Apple AirPods Pro",
       "date": "21 Jan 2021",
       "price": "PKR 8,999",
+      "rate": "false",
     },
     {
       "imagepath": 'assets/images/LikeItemImages/image2.jpg',
       "title": "JBL Charge 2 Speaker",
       "date": "20 Dec 2020",
       "price": "PKR 6,499",
+      "rate": "false",
     },
     {
       "imagepath": 'assets/images/LikeItemImages/image3.jpg',
       "title": "PlayStation Controller",
       "date": "14 Nov 2020",
       "price": "PKR 1,299",
+      "rate": "false",
     },
     {
       "imagepath": 'assets/images/LikeItemImages/image4.jpg',
       "title": "Nexus Mountain Bike",
       "date": "05 Oct 2020",
       "price": "PKR 9,100",
+      "rate": "true",
     },
     {
       "imagepath": 'assets/images/LikeItemImages/image5.jpg',
       "title": "Wildcraft Ranger Tent",
       "date": "30 Sep 2020",
       "price": "PKR 999",
+      "rate": "false",
     },
   ];
 
@@ -144,22 +149,63 @@ Widget likeItem() {
                           color: AppColors.black,
                         ),
                       ),
-                      Text(
-                        productlist[index]["price"],
-                        style: TextStyle(
-                          height: 2,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            productlist[index]["price"],
+                            style: TextStyle(
+                              height: 2,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.black,
+                            ),
+                          ),
+                          Spacer(),
+                          productlist[index]["rate"] == "false"
+                              ? Container(
+                                  width: 80,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(13),
+                                    color: AppColors.black,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Rate now',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Row(
+                                  children: [
+                                    Text(
+                                      'You rated 5',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.black,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Icon(
+                                      Icons.star,
+                                      color: const Color.fromARGB(
+                                        255,
+                                        222,
+                                        200,
+                                        2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                        ],
                       ),
                     ],
                   ),
-                ),
-                CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.favorite, color: AppColors.pink),
                 ),
               ],
             ),

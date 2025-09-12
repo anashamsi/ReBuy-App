@@ -12,9 +12,10 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(25),
+            padding: EdgeInsets.all(25),
             child: Column(
               children: [
                 topRow(),
@@ -26,7 +27,7 @@ class HomeView extends GetView<HomeController> {
                     Text(
                       'New arrivals',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.w700,
                         color: AppColors.black,
                       ),
@@ -37,7 +38,7 @@ class HomeView extends GetView<HomeController> {
                       child: Text(
                         'View more',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: AppColors.DarkGrey,
                         ),
@@ -53,7 +54,7 @@ class HomeView extends GetView<HomeController> {
                     Text(
                       'Recently viewed',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.w700,
                         color: AppColors.black,
                       ),
@@ -64,7 +65,7 @@ class HomeView extends GetView<HomeController> {
                       child: Text(
                         'View more',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: AppColors.DarkGrey,
                         ),
@@ -110,7 +111,7 @@ Widget topRow() {
               applyHeightToLastDescent: false,
             ),
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 18,
               fontWeight: FontWeight.w300,
               color: AppColors.pink,
             ),
@@ -121,7 +122,7 @@ Widget topRow() {
       Expanded(
         child: IconButton(
           onPressed: () {},
-          icon: Icon(CupertinoIcons.bars, color: AppColors.black, size: 40),
+          icon: Icon(CupertinoIcons.bars, color: AppColors.black, size: 30),
         ),
       ),
     ],
@@ -176,11 +177,11 @@ Widget inputTextField(String name, [bool? obsecure]) {
       hintText: name,
       hintStyle: TextStyle(
         color: AppColors.DarkGrey,
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: FontWeight.w300,
       ),
 
-      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(18),
         borderSide: BorderSide.none,
@@ -263,7 +264,7 @@ Widget buildCard({
       boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8)],
     ),
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -277,43 +278,45 @@ Widget buildCard({
         Padding(
           padding: EdgeInsets.all(12),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.black,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      yearBrand,
+                      style: TextStyle(
+                        color: AppColors.lightPink,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    title,
+                    price,
                     style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
                       color: AppColors.black,
                     ),
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    yearBrand,
-                    style: TextStyle(
-                      color: AppColors.lightPink,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
                 ],
-              ),
-
-              Spacer(),
-              Text(
-                price,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.black,
-                ),
-                textHeightBehavior: TextHeightBehavior(
-                  applyHeightToFirstAscent: true,
-                  applyHeightToLastDescent: true,
-                ),
               ),
             ],
           ),

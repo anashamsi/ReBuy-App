@@ -18,6 +18,8 @@ class MainWrapper extends StatelessWidget {
     MessageView(),
   ];
 
+  MainWrapper({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(

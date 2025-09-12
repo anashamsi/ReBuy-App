@@ -48,7 +48,7 @@ class LoginView extends GetView<LoginController> {
                 Text(
                   'Login with one of the following options',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 11,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff828282),
                   ),
@@ -173,7 +173,7 @@ Widget inputTextField(String name, [bool? obsecure]) {
       hintText: name,
       hintStyle: TextStyle(color: AppColors.DarkGrey),
 
-      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(18),
         borderSide: BorderSide.none,
@@ -197,6 +197,10 @@ Widget loginButton() {
 
     child: ElevatedButton(
       onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+      ),
       child: Text(
         'Log in',
         style: TextStyle(
@@ -204,10 +208,6 @@ Widget loginButton() {
           fontWeight: FontWeight.w700,
           color: Colors.white,
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
       ),
     ),
   );
@@ -221,7 +221,7 @@ Widget signupline() {
         'Don’t have an account?',
         style: TextStyle(
           color: AppColors.DarkGrey,
-          fontSize: 18,
+          fontSize: 12,
           fontWeight: FontWeight.w400,
         ),
       ),
@@ -234,7 +234,7 @@ Widget signupline() {
           'Sign up',
           style: TextStyle(
             color: AppColors.pink,
-            fontSize: 18,
+            fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
         ),
